@@ -1,12 +1,26 @@
 package restfull.dio.model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
+@Entity(name = "tb_account")
 public class Account {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+
+    @Column(unique = true)
+    private  String number;
+
     private String agency;
+
+
+    @Column(scale = 13, precision = 2)
+    private BigDecimal balance;
+
+    @Column(name = "additional_limit", scale = 13, precision = 2)
     private BigDecimal limit;
 
     public Long getId() {
@@ -17,12 +31,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNumber() {
+        return number;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getAgency() {
@@ -31,6 +45,14 @@ public class Account {
 
     public void setAgency(String agency) {
         this.agency = agency;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public BigDecimal getLimit() {
